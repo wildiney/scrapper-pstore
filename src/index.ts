@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer'
 import autoScroll from './utils/puppeteer-autoscroll'
 import fs from 'fs'
 
-const search = encodeURI('agronegócio');
+const search = encodeURI('agronegocio');
 
 (async () => {
   console.log('start')
@@ -60,11 +60,6 @@ const search = encodeURI('agronegócio');
         installs = await page.$eval('#yDmH0d > c-wiz.SSPGKf.Czez9d > div > div > div.tU8Y5c > div:nth-child(1) > div > div > c-wiz > div.hnnXjf > div.JU1wdd > div > div > div:nth-child(2) > div.ClM7O', (item) => { return item.textContent?.replace('+', '') })
       }
     } catch (e) { console.log('Error getting installs from ', title) }
-    // if (installs === 0) {
-    // try {
-    //   installs = await page.$eval('#fcxH9b > div.WpDbMd > c-wiz > div > div.ZfcPIb > div > div > main > c-wiz:nth-child(3) > div.W4P4ne > div.JHTxhe.IQ1z0d > div > div:nth-child(3) > span > div > span', (item) => { return item.textContent?.replace('+', '') })
-    // } catch (e) { console.log(e) }
-    // }
     const content = `${title};${channel};${genre};${reviews};${stars};${lastUpdate};${installs};${link}\n`
     fs.appendFileSync(`${decodeURI(search)}.csv`, content)
     apps.push({ title, channel, genre, reviews, stars, lastUpdate, installs, link })
